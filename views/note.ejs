@@ -1,0 +1,33 @@
+<%- include("./header.ejs")  %>
+
+    <section class="notePage">
+        <p>
+            The secret is:
+        </p>
+        <p class="noteDisplay">
+            <%= text %>
+        </p>
+        <p>
+            It has been destroyed on the server already and cannot be opened again.
+        </p>
+        <p>
+            <input class="btn" id="copyBtn" type="button" value="Copy secret to clipboard">
+        </p>
+        <div class="copyText">Copied to clipboard!</div>
+        <p>
+            <a class="btn" href="/add">Create a new secret</a>
+        </p>
+    </section>  
+    
+    <script type="module">
+        import {copyStringToClipboard} from "./js/helper.js";
+        $("#copyBtn").click(() => {
+            copyStringToClipboard(`<%= text %>`); 
+            $(".copyText").slideDown("fast");
+            setTimeout(() => {
+                $(".copyText").slideUp("fast");
+            },2500);
+        })
+    </script>
+
+<%- include("./footer.ejs")  %> 

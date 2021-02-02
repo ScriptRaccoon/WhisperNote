@@ -1,0 +1,30 @@
+<%- include("./header.ejs")  %> 
+    
+    <section class="added">
+        <p>
+            Your secret has been created successfully. It can be opened (only once) via the following URL:
+        </p>
+        <p class="urlDisplay">
+            <%= url %> 
+        </p>
+        <p>
+            <input class="btn" id="copyBtn" type="button" value="Copy URL to clipboard">
+        </p>
+        <div class="copyText">Copied to clipboard!</div>
+        <p>
+            <a class="btn" href="/add">Create a new secret</a>
+        </p>
+    </section>   
+
+    <script type="module">
+        import {copyStringToClipboard} from "./js/helper.js";
+        $("#copyBtn").click(() => {
+            copyStringToClipboard(`<%= url %>`); 
+            $(".copyText").slideDown("fast");
+            setTimeout(() => {
+                $(".copyText").slideUp("fast");
+            },2500);
+        })
+    </script>
+
+<%- include("./footer.ejs")  %> 

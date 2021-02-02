@@ -1,0 +1,16 @@
+<%- include("./header.ejs")  %> 
+
+    <h2>
+        Create a secret
+    </h2>
+    
+    <form class="addForm" method="POST" action="/add">
+        <textarea name="text"></textarea>
+        <input class="btn" type="submit" value="Submit">
+    </form>
+
+    <section class="error">
+        <%= error %> 
+    </section>
+
+<%- include("./footer.ejs")  %> 
