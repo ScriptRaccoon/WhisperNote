@@ -1,0 +1,24 @@
+<%- include("./header.ejs")  %> 
+       
+        <h2>Secret has been created</h2>
+        <p>
+            Your secret can be opened (only once) via the following URL:
+        </p>
+        <p class="dashed" id="urlDisplay">
+            <%= url %> 
+        </p>
+        <p>
+            <input class="btn" id="copyBtn" type="button" value="Copy URL">
+        </p>
+        <div id="copyInfo">Copied to clipboard!</div>
+        <p>
+            <a class="btn" href="/create">Create a new secret</a>
+        </p>
+      
+    <script src="../js/copy.js"></script>
+    <script>
+        const url = `<%= url %>`;
+        enableCopyfunction(url, "#urlDisplay");
+    </script>
+
+<%- include("./footer.ejs")  %> 
