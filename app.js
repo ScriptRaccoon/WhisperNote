@@ -47,4 +47,6 @@ app.post("/secret", async (req, res) => {
     res.json(response);
 });
 
-app.use((req, res) => res.render("error", { error: "There is no such page." }));
+app.use((req, res) =>
+    res.status(404).render("error", { error: "There is no such page." })
+);

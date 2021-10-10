@@ -10,6 +10,7 @@ async function submitSecret(secret) {
         console.log("Secret has been created with id", id);
         return { id };
     } catch (err) {
+        console.log("Secret could not be created", err);
         return { error: err };
     }
 }
