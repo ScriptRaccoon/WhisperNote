@@ -1,5 +1,6 @@
 const { firestore } = require("./firebase.js");
 const { decrypt } = require("./encryption.js");
+const { isExpired } = require("./expiredSecrets.js");
 
 async function getSecret(id) {
     try {
@@ -10,10 +11,7 @@ async function getSecret(id) {
             throw "There is no such secret.";
         }
         const secret = doc.data();
-        const now = new Date();
-        const then = secret.created.toDate();
-        const hoursPassed = (now - then) / (1000 * 60 * 60);
-        if (hoursPassed >= parseInt(secret.expires_in)) {
+        if (isExpired(doc)) {
             await docRef.delete();
             console.log(`Secret with id ${id} is expired and therefore deleted`);
             throw "This secret has expired.";

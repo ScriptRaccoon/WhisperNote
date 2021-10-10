@@ -1,14 +1,19 @@
+const { deleteExpired } = require("./controllers/expiredSecrets.js");
+const { submitSecret } = require("./controllers/submitSecret.js");
+const { getSecret } = require("./controllers/getSecret.js");
+
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, () => console.log("Server started on PORT", PORT));
+app.listen(PORT, () => {
+    console.log("Server started on PORT", PORT);
+    deleteExpired();
+    setInterval(deleteExpired, 1000 * 60 * 60);
+});
 
 require("dotenv").config();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-
-const { submitSecret } = require("./controllers/submitSecret.js");
-const { getSecret } = require("./controllers/getSecret.js");
 
 app.use(express.static("public"));
 
