@@ -6,7 +6,7 @@ const serviceAccount = {
     type: "service_account",
     project_id: "whispernoteapp",
     private_key_id: "51155c78d1c84a0490d6476a64da961c38c67d94",
-    private_key: process.env.FIREBASE_KEY,
+    private_key: process.env.FIREBASE_KEY.replace(/\\n/g, "\n"),
     client_email: "firebase-adminsdk-dhmpg@whispernoteapp.iam.gserviceaccount.com",
     client_id: "109957907066713622113",
     auth_uri: "https://accounts.google.com/o/oauth2/auth",
