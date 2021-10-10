@@ -36,14 +36,15 @@ app.get("/created", (req, res) => {
     res.render("created", { url });
 });
 
-app.get("/secret", async (req, res) => {
+app.get("/secret", (req, res) => {
     if (!req.query.id) return res.redirect("/");
-    const response = await getSecret(req.query.id);
-    if (response.error) {
-        res.render("error", { error: response.error });
-    } else {
-        res.render("secret", { content: response.content });
-    }
+    res.render("secret", { id: req.query.id });
+});
+
+app.post("/secret", async (req, res) => {
+    if (!req.body.id) return res.redirect("/");
+    const response = await getSecret(req.body.id);
+    res.json(response);
 });
 
 app.use((req, res) => res.render("error", { error: "There is no such page." }));
