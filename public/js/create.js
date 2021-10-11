@@ -1,5 +1,9 @@
 $("#submitBtn").click(async () => {
     const content = $("#secretInput").val();
+    if (!content) {
+        $(".error").text("Please enter a secret.");
+        return;
+    }
     const expires_in = $("#expireSelect option:selected").val();
     const response = await fetch("/create", {
         method: "POST",

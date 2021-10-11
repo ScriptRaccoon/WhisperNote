@@ -9,17 +9,19 @@ function isExpired(doc) {
 }
 
 async function deleteExpired() {
-    console.log("Will delete expired secrets");
+    console.log("Check for expired secrets");
     let counter = 0;
+    let allCounter = 0;
     const snap = await firestore.collection("secrets").get();
     snap.forEach((doc) => {
+        allCounter++;
         if (isExpired(doc)) {
             counter++;
             console.log(`Secret with id ${doc.id} is expired and therefore deleted`);
             doc.ref.delete();
         }
     });
-    console.log(`${counter} secrets have been deleted`);
+    console.log(`Deleted ${counter} of ${allCounter} secrets`);
 }
 
 module.exports = { isExpired, deleteExpired };

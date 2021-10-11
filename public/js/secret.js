@@ -16,7 +16,7 @@ $("#showBtn").click(async () => {
         const content = data.content;
         $("#secretDisplay").text(content);
         $("#showBtn").remove();
-        $("#showSecret").show();
+        $("#showSecret").fadeIn();
         enableCopyfunction(content, "#secretDisplay");
     }
 });
