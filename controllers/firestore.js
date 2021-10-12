@@ -24,4 +24,4 @@ const firestore = app.firestore();
 
 console.log("Firestore loaded for", firestore.projectId);
 
-module.exports = { firestore };
+module.exports = firestore;

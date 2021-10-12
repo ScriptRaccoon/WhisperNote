@@ -1,7 +1,7 @@
-const { firestore } = require("./firebase.js");
+const firestore = require("./firestore.js");
 const { encrypt } = require("./encryption.js");
 
-async function submitSecret(secret) {
+async function createSecret(secret) {
     try {
         secret.created = new Date();
         secret.content = encrypt(secret.content);
@@ -10,9 +10,10 @@ async function submitSecret(secret) {
         console.log("Secret has been created with id", id);
         return { id };
     } catch (err) {
-        console.log("Secret could not be created", err);
+        console.log("Secret could not be created");
+        console.log(err);
         return { error: err };
     }
 }
 
-module.exports = { submitSecret };
+module.exports = createSecret;

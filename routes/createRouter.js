@@ -1,6 +1,7 @@
-const { submitSecret } = require("../controllers/submitSecret.js");
+const createSecret = require("../controllers/createSecret.js");
 
 const express = require("express");
+const { json } = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -9,8 +10,8 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
     if (!req.body) return res.redirect("/");
-    const response = await submitSecret(req.body);
-    res.json(response);
+    const secret = await createSecret(req.body);
+    res.json(secret);
 });
 
 module.exports = router;
