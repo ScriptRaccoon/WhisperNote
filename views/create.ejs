@@ -3,15 +3,23 @@
         Create a secret
     </h2>
     <textarea id ="secretInput"></textarea>
-    <p>Expire Time
-        <select id ="expireSelect">
-            <option value="1">1 hour</option>
-            <option value="6">6 hours</option>
-            <option value="24">1 day</option>
-            <option value="72">3 days</option>
-            <option value="168">1 week</option>
-        </select>
-    </p>
+    <div id="securityControls">
+        <p>
+            <span>Expire Time</span>
+            <select id ="expireSelect">
+                <option value="1">1 hour</option>
+                <option value="6">6 hours</option>
+                <option value="24">1 day</option>
+                <option value="72">3 days</option>
+                <option value="168">1 week</option>
+            </select>
+        </p>
+        <p>
+            <span>Password (optional)</span>            
+            <input type="text" id="passwordInput">
+        </p>
+    </div>
+    
     <p>
         <input id="submitBtn" class="btn" type="submit" value="Submit">
     </p>

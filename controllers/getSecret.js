@@ -1,8 +1,8 @@
 const firestore = require("./firestore.js");
-const { decrypt } = require("./encryption.js");
+const { decrypt, verifyPassword } = require("./encryption.js");
 const { isExpired } = require("./expiredSecrets.js");
 
-async function getSecret(id) {
+async function getSecret(id, password) {
     try {
         const docRef = firestore.collection("secrets").doc(id);
         const doc = await docRef.get();
@@ -15,6 +15,12 @@ async function getSecret(id) {
             await docRef.delete();
             console.log(`Secret with id ${id} is expired and therefore deleted`);
             throw "This secret has expired.";
+        }
+        if (secret.password) {
+            const valid = await verifyPassword(password, secret.password);
+            if (!valid) {
+                throw "The password is not correct";
+            }
         }
         await docRef.delete();
         console.log(`Secret with id ${id} has been opened and therefore deleted`);

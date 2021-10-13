@@ -6,7 +6,11 @@ router.get("/", (req, res) => {
     if (!id) return res.redirect("/");
     const baseURL = `${req.protocol}://${req.get("host")}`;
     const url = `${baseURL}/secret?id=${id}`;
-    res.render("created", { url });
+    const password = req.query.password;
+    res.render(
+        "created",
+        password ? { url, hasPassword: true, password } : { url, hasPassword: false }
+    );
 });
 
 module.exports = router;

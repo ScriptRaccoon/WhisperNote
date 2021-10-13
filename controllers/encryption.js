@@ -22,4 +22,23 @@ function decrypt(text) {
     return decrypted;
 }
 
-module.exports = { encrypt, decrypt };
+async function hashedPassword(pw) {
+    return new Promise((resolve, reject) => {
+        const salt = crypto.randomBytes(8).toString("hex");
+        crypto.scrypt(pw, salt, 64, (err, derivedKey) => {
+            if (err) reject(err);
+            resolve(salt + ":" + derivedKey.toString("hex"));
+        });
+    });
+}
+
+async function verifyPassword(pw, hash) {
+    return new Promise((resolve, reject) => {
+        const [salt, key] = hash.split(":");
+        crypto.scrypt(pw, salt, 64, (err, derivedKey) => {
+            if (err) reject(err);
+            resolve(key == derivedKey.toString("hex"));
+        });
+    });
+}
+module.exports = { encrypt, decrypt, hashedPassword, verifyPassword };

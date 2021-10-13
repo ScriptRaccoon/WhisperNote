@@ -5,18 +5,22 @@ $("#submitBtn").click(async () => {
         return;
     }
     const expires_in = $("#expireSelect option:selected").val();
+    const password = $("#passwordInput").val();
     const response = await fetch("/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content, expires_in }),
+        body: JSON.stringify({ content, expires_in, password }),
     });
     const data = await response.json();
-    if (data.error || !data.id) {
+    if (data.error) {
         console.log(data.error);
         $(".error").text("The secret could not be submitted.");
     } else {
-        window.location.href = `/created?id=${data.id}`;
+        let newURL = data.password
+            ? `/created?id=${data.id}&password=${data.password}`
+            : `/created?id=${data.id}`;
+        window.location.href = newURL;
     }
 });

@@ -2,7 +2,10 @@
        
         <h2>Secret has been created</h2>
         <p>
-            Your secret can be opened (only once) via the following URL:
+            Your secret can be opened (only once) via the following
+            <%if (hasPassword) {%>URL and the password
+                <span id="passwordDisplay"><%= password %></span>:<%}%>
+            <%if (!hasPassword) {%>URL:<%}%>
         </p>
         <p class="dashed" id="urlDisplay">
             <%= url %> 
@@ -11,6 +14,7 @@
             <input class="btn" id="copyBtn" type="button" value="Copy URL">
         </p>
         <div id="copyInfo">Copied to clipboard!</div>
+        
         <p>
             <a id="createLink" class="btn" href="/create">Create another secret</a>
         </p>

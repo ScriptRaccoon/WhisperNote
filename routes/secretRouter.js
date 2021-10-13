@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
     if (!req.body.id) return res.redirect("/");
-    const secret = await getSecret(req.body.id);
+    const secret = await getSecret(req.body.id, req.body.password);
     res.json(secret);
 });
 

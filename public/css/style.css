@@ -129,17 +129,39 @@ h2 {
 }
 
 #expireSelect {
+    margin: 0px 5px;
+}
+
+#securityControls {
+    text-align: left;
+}
+
+#securityControls p {
+    margin: 15px 0px;
+}
+
+#expireSelect,
+#passwordInput {
     padding: 5px;
     font-family: inherit;
     font-size: inherit;
-    margin: 0px 5px;
     border-radius: 7px;
     border: 1px solid gray;
     background-color: inherit;
+    outline: none;
+}
+
+#expireSelect:focus,
+#passwordInput:focus {
+    border: 1px solid black;
 }
 
 .error {
     color: red;
+}
+
+#passwordInput {
+    max-width: 260px;
 }
 
 /* created page */
@@ -166,6 +188,11 @@ h2 {
 
 #copyInfo {
     display: none;
+}
+
+#passwordDisplay {
+    font-weight: bold;
+    font-family: "Source Code Pro", monospace;
 }
 
 /* secret page */

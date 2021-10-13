@@ -1,10 +1,11 @@
 $("#showBtn").click(async () => {
+    const password = $("#passwordInput").val();
     const response = await fetch("/secret", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ id, password }),
     });
     const data = await response.json();
     if (data.error) {
@@ -16,6 +17,7 @@ $("#showBtn").click(async () => {
         const content = data.content;
         $("#secretDisplay").text(content);
         $("#showBtn").remove();
+        $("#passwordWrapper").remove();
         $("#showSecret").fadeIn();
         enableCopyfunction(content, "#secretDisplay");
     }
