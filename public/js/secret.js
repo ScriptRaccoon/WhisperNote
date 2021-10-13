@@ -1,5 +1,6 @@
 $("#showBtn").click(async () => {
-    const password = $("#passwordInput").val();
+    const password = hasPassword ? $("#passwordInput").val() : "";
+    $("#showBtn, #passwordInput").prop("disabled", true);
     const response = await fetch("/secret", {
         method: "POST",
         headers: {

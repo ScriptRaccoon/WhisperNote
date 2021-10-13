@@ -2,12 +2,22 @@ const firestore = require("./firestore.js");
 const { decrypt, verifyPassword } = require("./encryption.js");
 const { isExpired } = require("./expiredSecrets.js");
 
-async function getSecret(id, password) {
+async function checkSecret(id) {
+    const docRef = firestore.collection("secrets").doc(id);
+    const doc = await docRef.get();
+    if (!doc.exists) {
+        return { error: "There is no such secret." };
+    }
+    const secret = doc.data();
+    return { id, hasPassword: secret.password ? true : false };
+}
+
+async function getSecret(body) {
     try {
+        const { id, password } = body;
         const docRef = firestore.collection("secrets").doc(id);
         const doc = await docRef.get();
         if (!doc.exists) {
-            console.log(`There is no secret with id ${id}`);
             throw "There is no such secret.";
         }
         const secret = doc.data();
@@ -19,7 +29,7 @@ async function getSecret(id, password) {
         if (secret.password) {
             const valid = await verifyPassword(password, secret.password);
             if (!valid) {
-                throw "The password is not correct";
+                throw "The password is not correct.";
             }
         }
         await docRef.delete();
@@ -30,4 +40,4 @@ async function getSecret(id, password) {
     }
 }
 
-module.exports = getSecret;
+module.exports = { getSecret, checkSecret };
