@@ -23,20 +23,27 @@ async function getSecret(body) {
         const secret = doc.data();
         if (isExpired(secret)) {
             await docRef.delete();
-            console.log(`Secret with id ${id} is expired and therefore deleted`);
+            console.log(
+                `Secret with id ${id} is expired and therefore deleted`
+            );
             throw "This secret has expired.";
         }
         if (secret.password) {
-            const valid = await verifyPassword(password, secret.password);
+            const valid = await verifyPassword(
+                password,
+                secret.password
+            );
             if (!valid) {
                 throw "The password is not correct.";
             }
         }
         await docRef.delete();
-        console.log(`Secret with id ${id} has been opened and therefore deleted`);
+        console.log(
+            `Secret with id ${id} has been opened and therefore deleted`
+        );
         return { content: decrypt(secret.content) };
     } catch (err) {
-        return { error: err };
+        return { error: err.message };
     }
 }
 

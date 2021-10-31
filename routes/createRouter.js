@@ -1,7 +1,6 @@
 const createSecret = require("../controllers/createSecret.js");
 
 const express = require("express");
-const { json } = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {

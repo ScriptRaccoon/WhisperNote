@@ -15,8 +15,9 @@ $("#submitBtn").click(async () => {
     });
     const data = await response.json();
     if (data.error) {
-        console.log(data.error);
-        $(".error").text("The secret could not be submitted.");
+        $(".error").text(
+            `Secret could not be created: ${data.error}`
+        );
     } else {
         let newURL = data.password
             ? `/created?id=${data.id}&password=${data.password}`
