@@ -17,8 +17,6 @@ app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-// only apply to requests that begin with /api/
-
 const homeRouter = require("./routes/homeRouter.js");
 const createRouter = require("./routes/createRouter.js");
 const createdRouter = require("./routes/createdRouter.js");
