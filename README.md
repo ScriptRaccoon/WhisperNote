@@ -2,4 +2,4 @@
 
 Create little secrets to be shared with anyone via a one-time-link.
 
-https://whispernote.herokuapp.com
+https://whispernote.onrender.com
